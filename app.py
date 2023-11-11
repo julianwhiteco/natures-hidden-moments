@@ -1,6 +1,6 @@
 import csv
 import random
-import openai
+from openai import OpenAI
 import requests
 from PIL import Image, ImageDraw, ImageFont
 import datetime
@@ -32,21 +32,26 @@ def generate_dalle_prompt(csv_file):
 
 
 def generate_and_save_image(prompt, openai_key):
-    openai.api_key = openai_key
+    client = OpenAI(api_key=openai_key)
+
     try:
         # Generate image URL from DALL-E 3
-        response = openai.Image.create(
+        response = client.images.generate(
             model="dall-e-3",
             prompt=prompt,
+            size="1024x1024",
+            quality="standard",
             n=1,
-            size="1024x1024"
         )
-        image_url = response['data'][0]['url']
+        image_url = response.data[0].url
+
+        # Download and save the image as 'image.jpg', overwriting if it exists
         image_response = requests.get(image_url)
         if image_response.status_code == 200:
             filename = 'image.jpg'
             with open(filename, 'wb') as f:
                 f.write(image_response.content)
+            print(f"Image saved as {filename}")
             return True
         else:
             print("Failed to download the image")
