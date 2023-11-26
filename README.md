@@ -41,6 +41,6 @@ Replace the following:
 - Each row in these columns is randomly combined to create unique prompts for image generation. I have provided an example CSV with some data prefilled, feel free to change any that you desire. 
 - Ensure the bot has administrative permissions in the Telegram channel for posting images. Customize the pixelify.ttf font path in the script if a different font is desired for the image overlay.
 
-##Licenses
+## Licenses
 - Font: Obtained from https://github.com/eifetx/Pixelify-Sans with the SIL Open Font License available at https://github.com/eifetx/Pixelify-Sans/blob/main/OFL.txt
 - This appliance: Available and distributable under an MIT license.
